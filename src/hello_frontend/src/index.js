@@ -31,7 +31,7 @@ function renderProducts() {
     listItem.textContent = `${product.name} - $${product.price.toFixed(2)}`;
 
     const addToCartBtn = document.createElement("button");
-    addToCartBtn.textContent = "Interact wiht the Seller";
+    addToCartBtn.textContent = "Add to Cart";
     addToCartBtn.addEventListener("click", () => {
       addToCart(product);
     });
