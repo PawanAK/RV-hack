@@ -17,6 +17,13 @@ const buyerBtn = document.getElementById("buyerBtn");
 const sellerPage = document.getElementById("sellerPage");
 const buyerPage = document.getElementById("buyerPage");
 const productForm = document.getElementById("productForm");
+const modal = document.getElementById("modal");
+const chat = document.getElementById("chat");
+const messageInput = document.getElementById("messageInput");
+const sendMessageBtn = document.getElementById("sendMessageBtn");
+const commitBtn = document.getElementById("commitBtn");
+const sellerDot = document.getElementById("sellerDot");
+const buyerDot = document.getElementById("buyerDot");
 
 // Hide seller and buyer pages initially
 sellerPage.style.display = "none";
@@ -45,6 +52,23 @@ function renderProducts() {
 function addToCart(product) {
   cartItems.push(product);
   renderCart();
+
+  const addToCartBtns = document.querySelectorAll("#productList button");
+  addToCartBtns.forEach((btn) => {
+    btn.disabled = true; // Disable all "Add to Cart" buttons
+  });
+
+  const listItem = document.querySelector(`li:last-child`);
+
+  const chatBox = document.createElement("div");
+  chatBox.classList.add("chat-box");
+
+  const chatBtn = document.createElement("button");
+  chatBtn.textContent = "Chat with Seller";
+  chatBtn.addEventListener("click", openChatModal);
+
+  chatBox.appendChild(chatBtn);
+  listItem.appendChild(chatBox);
 }
 
 // Render cart
@@ -126,6 +150,51 @@ productForm.addEventListener("submit", (e) => {
     renderProducts();
 
     console.log("Product added successfully!");
+  }
+});
+
+// Open chat modal
+function openChatModal() {
+  modal.style.display = "block";
+}
+
+// Close chat modal
+function closeChatModal() {
+  modal.style.display = "none";
+}
+
+// Send message button click event handler
+sendMessageBtn.addEventListener("click", () => {
+  const message = messageInput.value.trim();
+  if (message) {
+    const messageElement = document.createElement("div");
+    messageElement.textContent = message;
+    chat.appendChild(messageElement);
+    messageInput.value = "";
+  }
+});
+
+// Commit button click event handler
+commitBtn.addEventListener("click", () => {
+  console.log("Commit button clicked");
+
+  commitBtn.disabled = true;
+  commitBtn.textContent = "Committing...";
+
+  // Simulate asynchronous commit process
+  setTimeout(() => {
+    // Update the dots to green
+    sellerDot.classList.add("green");
+    buyerDot.classList.add("green");
+
+    console.log("Commit completed successfully!");
+  }, 2000);
+});
+
+// Close modal when clicked outside the modal content
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeChatModal();
   }
 });
 

@@ -33,6 +33,21 @@
       <h3>Shopping Cart</h3>
       <ul id="cartList"></ul>
       <button id="checkoutBtn" disabled>Checkout</button>
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <h4>Chat with Seller</h4>
+          <div id="chat" class="chat"></div>
+          <textarea id="messageInput" placeholder="Type your message..."></textarea>
+          <button id="sendMessageBtn">Send</button>
+          <div class="commit">
+            <button id="commitBtn">Commit</button>
+            <div class="dots">
+              <div class="dot" id="sellerDot"></div>
+              <div class="dot" id="buyerDot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <script src="index.js"></script>
